@@ -1859,6 +1859,8 @@ function buildNet(){
   window.addEventListener('resize', function(){ layout(); render(); chart.resize(); });
 
   function applyNetFilter(){
+    /* 合并模式（不能传 notMerge=true）：增量 option 只含 data/links，
+       若全量替换会丢掉 series.type/layout，导致切换分类后画布空白 */
     chart.setOption({
       series:[{
         data: nodes.map(function(m){
@@ -1877,7 +1879,7 @@ function buildNet(){
             lineStyle:{width:1.2+l.value/50, color:'#262119', opacity: show?.3:.05}};
         })
       }]
-    }, true);
+    });
   }
 
   chart.on('click', function(params){
