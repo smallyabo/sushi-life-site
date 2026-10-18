@@ -1,0 +1,22 @@
+# 本地交付物（不进仓库）
+苏轼的一生.exe
+苏轼的一生_静态站点包.zip
+苏轼的一生_二维码.png
+
+# WorkBuddy 内部文件
+.wbapp_*
+.workbuddy/
+
+# 打包与构建中间产物
+_pack/
+_unused/
+build/
+dist/
+__pycache__/
+*.spec
+*.pyc
+
+# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
