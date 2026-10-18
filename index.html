@@ -5,17 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>苏轼的一生 · 人生如逆旅</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%23A63A2B'/%3E%3Ctext x='32' y='42' font-size='26' fill='%23F6EFE2' text-anchor='middle' font-family='serif'%3E东坡%3C/text%3E%3C/svg%3E">
+<!-- 首屏关键资源预加载：正文宋体 + 首图，减少字体闪动与 LCP 等待 -->
+<link rel="preload" href="assets/fonts/noto-serif-sc-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/ink_hero.jpg" as="image">
 <style>
-/* 本地字体（原飞书字体服务，已下载到 assets/fonts） */
+/* 本地字体（子集化 + WOFF2，仅含本页实际用到的字形） */
 @font-face{
   font-family:'Ma Shan Zheng';
   font-style:normal;font-weight:400;font-display:swap;
-  src:url('assets/fonts/ma-shan-zheng.ttf') format('truetype');
+  src:url('assets/fonts/ma-shan-zheng.woff2') format('woff2'),
+      url('assets/fonts/ma-shan-zheng.ttf') format('truetype');
 }
 @font-face{
   font-family:'Noto Serif SC';
   font-style:normal;font-weight:400;font-display:swap;
-  src:url('assets/fonts/noto-serif-sc-400.ttf') format('truetype');
+  src:url('assets/fonts/noto-serif-sc-400.woff2') format('woff2'),
+      url('assets/fonts/noto-serif-sc-400.ttf') format('truetype');
 }
 /* ========== 设计令牌：水墨体系 ========== */
 :root{
@@ -588,6 +593,14 @@ button{font-family:var(--serif);cursor:pointer}
 .footer .f-brand{font-family:var(--serif);font-weight:900;font-size:23px;color:var(--ink);letter-spacing:.14em;margin-bottom:10px}
 .footer .f-tag{font-size:9px;color:var(--ink-3);letter-spacing:.2em}
 .footer .f-end{text-align:center;margin-top:44px;padding-top:26px;border-top:1px solid var(--line);font-size:9px;color:var(--ink-3);letter-spacing:.12em}
+.footer .f-designer{
+  margin-top:14px;font-size:11px;letter-spacing:.14em;color:var(--ink-2);
+  display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;
+}
+.footer .f-designer strong{color:var(--cinnabar);font-weight:700;letter-spacing:.1em}
+.footer .f-designer a{color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--line-strong);padding-bottom:1px;transition:all .2s}
+.footer .f-designer a:hover{color:var(--cinnabar);border-color:var(--cinnabar)}
+.footer .f-sep{color:var(--line-strong);font-size:10px}
 
 /* ========== 响应式 ========== */
 @media(max-width:1080px){
@@ -1306,7 +1319,13 @@ body{font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","Sim
         </ul>
       </div>
     </div>
-    <div class="f-end">制作于 2026 · 致敬九百二十年前那位"一蓑烟雨任平生"的行人</div>
+    <div class="f-end">制作于 2026 · 致敬九百二十年前那位"一蓑烟雨任平生"的行人
+      <div class="f-designer">
+        <span>Designed By <strong>Smallyabo</strong></span>
+        <span class="f-sep">·</span>
+        <span>email：<a href="mailto:yazheng@ahu.edu.cn">yazheng@ahu.edu.cn</a></span>
+      </div>
+    </div>
   </div>
 </footer>
 
@@ -1314,7 +1333,7 @@ body{font-family:"Noto Serif SC","Source Han Serif SC","Songti SC","STSong","Sim
 <div class="read-progress" id="readProgress"></div>
 
 <!-- ================= 古风背景音乐 ================= -->
-<audio id="bgMusic" src="assets/music/bg.wav" loop preload="auto"></audio>
+<audio id="bgMusic" src="assets/music/bg.mp3" loop preload="none"></audio>
 <button class="music-btn" id="musicBtn" aria-label="播放背景音乐" title="播放背景音乐">
   <span class="mb-wave w1"></span>
   <span class="mb-wave w2"></span>
